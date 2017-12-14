@@ -1,5 +1,7 @@
 package com.kunlun;
 
+import com.kunlun.result.BaseResult;
+
 /**
  * @author by kunlun
  * @version <0.1>
@@ -7,5 +9,5 @@ package com.kunlun;
  */
 public interface IndexService {
 
-    String hello();
+    BaseResult hello();
 }

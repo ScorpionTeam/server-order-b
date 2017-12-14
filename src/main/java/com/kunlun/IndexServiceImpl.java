@@ -1,9 +1,13 @@
 package com.kunlun;
 
+import com.kunlun.entity.Seller;
+import com.kunlun.result.BaseResult;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
 
 /**
  * @author by kunlun
@@ -17,12 +21,12 @@ public class IndexServiceImpl implements IndexService {
 
     @HystrixCommand(fallbackMethod = "fallback")
     @Override
-    public String hello() {
+    public BaseResult hello() {
         LOGGER.info("Service B  接收到请求");
-        return "Order Server2 return ......";
+        return BaseResult.success("Server B 返回信息");
     }
 
-    public String fallback() {
-        return "Order Server2 Down ......";
+    public BaseResult fallback() {
+        return BaseResult.error("ERROR","Order Server2 Down");
     }
 }

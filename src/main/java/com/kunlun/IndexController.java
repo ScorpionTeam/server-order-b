@@ -1,5 +1,6 @@
 package com.kunlun;
 
+import com.kunlun.result.BaseResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,7 +17,7 @@ public class IndexController {
     private IndexService indexService;
 
     @GetMapping("/hello")
-    public String hello(){
+    public BaseResult hello(){
         return indexService.hello();
     }
 }
