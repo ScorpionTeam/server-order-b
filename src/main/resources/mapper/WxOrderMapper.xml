@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kunlun.order.WxOrderMapper">
+    <!--查询我的订单列表-->
+    <select id="findByWxCode" resultType="com.kunlun.entity.OrderExt">
+        SELECT id,
+        seller_id,
+        user_id,
+        order_no,
+        good_snapshot_id,
+        delivery_no,
+        delivery_id,
+        order_status,
+        order_type,
+        pay_type,
+        message,
+        recipients,
+        phone,
+        province,
+        city,
+        area,
+        address,
+        post_code,
+        good_name,
+        count,
+        wx_order_no,
+        create_date,
+        pay_date,
+        delivery_date,
+        good_id,
+        use_ticket,
+        ticket_id,
+        prepay_id,
+        remark,
+        refund_date,
+        update_date,
+        freight_fee,
+        good_fee,
+        payment_fee,
+        reduce_fee,
+        order_fee,
+        refund_fee,
+        send_good_id,
+        operate_point,
+        use_point
+        FROM t_order
+        WHERE user_id=#{userId}
+        <if test="orderStatus!=null">
+            AND order_status=#{orderStatus}
+        </if>
+    </select>
+
+    <!--退款-->
+    <update id="refund" parameterType="com.kunlun.entity.Order">
+        UPDATE t_order SET order_status='REFUND' WHERE id=#{id}
+    </update>
+
+    <!--查询订单详情-->
+    <select id="findByOrderId" resultType="com.kunlun.entity.Order">
+        SELECT id,
+        seller_id,
+        user_id,
+        order_no,
+        good_snapshot_id,
+        delivery_no,
+        delivery_id,
+        order_status,
+        order_type,
+        pay_type,
+        message,
+        recipients,
+        phone,
+        province,
+        city,
+        area,
+        address,
+        post_code,
+        good_name,
+        count,
+        wx_order_no,
+        create_date,
+        pay_date,
+        delivery_date,
+        good_id,
+        use_ticket,
+        ticket_id,
+        prepay_id,
+        remark,
+        refund_date,
+        update_date,
+        freight_fee,
+        good_fee,
+        payment_fee,
+        reduce_fee,
+        order_fee,
+        refund_fee,
+        send_good_id,
+        operate_point,
+        use_point
+        FROM t_order
+        WHERE id=#{orderId}
+    </select>
+
+    <!--签收后评价-->
+    <insert id="estimate" parameterType="com.kunlun.entity.Estimate">
+        INSERT INTO t_estimate(
+        good_id,
+        message,
+        user_id,
+        create_date,
+        update_date
+        ) VALUES (
+        #{goodId},
+        #{message},
+        #{userId},
+        now(),
+        now()
+        )
+    </insert>
+
+    <!--更新订单状态-->
+    <update id="updateOrderStatus" parameterType="com.kunlun.entity.Order">
+        UPDATE t_order SET order_status=#{orderStatus} WHERE id=#{id}
+    </update>
+</mapper>

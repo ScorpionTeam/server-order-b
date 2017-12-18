@@ -11,7 +11,7 @@ import org.springframework.web.client.RestTemplate;
 
 @SpringCloudApplication
 @SpringBootApplication
-@EnableAutoConfiguration(exclude = DataSourceAutoConfiguration.class)
+//@EnableAutoConfiguration(exclude = DataSourceAutoConfiguration.class)
 public class ServerOrderBApplication {
 
     @Bean
